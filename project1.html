@@ -1,0 +1,89 @@
+
+  </div>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch with LAP</title>
+    <link rel="stylesheet" href="./project2.css">
+
+  </head>
+  <body>
+    
+
+
+    <div class="stopwatch-container">
+      <div class="stopwatch-display">00:00:00</div>
+      <div class="controls">
+        <button id="startStopBtn">Start</button>
+        <button id="resetBtn">Reset</button>
+        <button id="lapBtn">Lap</button>
+      </div>
+      <ul id="lapTimes"></ul>
+
+      <script>
+
+let startTime;
+let running = false;
+let lapCounter = 1;
+
+const display = document.querySelector('.stopwatch-display');
+const lapTimesList = document.getElementById('lapTimes');
+const startStopBtn = document.getElementById('startStopBtn');
+const resetBtn = document.getElementById('resetBtn');
+const lapBtn = document.getElementById('lapBtn');
+
+function formatTime(milliseconds) {
+  const totalSeconds = Math.floor(milliseconds / 100);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const hours = Math.floor(minutes / 60);
+  return (
+    String(hours).padStart(2, '0') +':' +
+    String(minutes % 60).padStart(2, '0') + ':' +
+    String(seconds).padStart(2, '0'));
+}
+
+function updateDisplay() {
+  const elapsedTime = running ? Date.now() - startTime : 0;
+  display.textContent = formatTime(elapsedTime);
+}
+
+function startStop() {
+  if (running) {
+    clearInterval(interval);
+    running = false;
+    startStopBtn.textContent = 'Start';
+  } else {
+    startTime = Date.now() - (lapTimesList.children.length ? parseInt(lapTimesList.lastElementChild.textContent.split(':')[2])*1000 : 0);
+    interval = setInterval(updateDisplay, 100);
+    running = true;
+    startStopBtn.textContent = 'Stop';
+  }
+}
+
+function reset() {
+  clearInterval(interval);
+  running = false;
+  startStopBtn.textContent = 'Start';
+  display.textContent = '00:00:00';
+  lapTimesList.innerHTML = '';
+}
+
+function lap() {
+  const lapTime = document.createElement('li');
+  lapTime.textContent = `Lap ${lapCounter++}: ${display.textContent}`;
+  lapTimesList.appendChild(lapTime);
+}
+
+startStopBtn.addEventListener('click', startStop);
+resetBtn.addEventListener('click', reset);
+lapBtn.addEventListener('click', lap);
+
+      </script>
+
+
+
+  </body>
+  </html>

@@ -1,0 +1,46 @@
+.stopwatch-container {
+    text-align: center;
+    background-color:black;
+    border-radius: 20px;
+    display: grid;
+  align-items: center;
+  padding-top: 20px;
+  
+  }
+  
+  .stopwatch-display {
+    font-size: 100px;
+    margin: 100px;
+    color: antiquewhite;
+    background-color: brown;
+    border-radius:500px ;
+    
+    
+ 
+  }
+  
+  .controls button {
+    margin: 5px;
+    padding: 8px 16px;
+    color:brown;
+    font-weight: 900;
+    border-radius: 50px;
+    border-width: 0px;
+    height: 80px;
+    width: 80px;
+  }
+  
+  #lapTimes {
+    list-style-type: none;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: gold;
+  }
+  
+  #lapTimes li {
+    margin-bottom: 15px;
+
+  }
+  
